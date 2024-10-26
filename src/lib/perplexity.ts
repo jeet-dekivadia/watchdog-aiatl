@@ -4,7 +4,7 @@ interface PerplexityResponse {
   sources?: string[];
 }
 
-export async function analyzeCredibility(name: string): Promise<CredibilityResult> {
+export async function analyzeCredibility(name: string): Promise<StarCredibility> {
   const API_KEY = "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";
   const ENDPOINT = "https://api.perplexity.ai/chat/completions";
   const MODEL_NAME = "llama-3.1-sonar-small-128k-online";
