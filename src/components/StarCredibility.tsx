@@ -1,11 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Star, User, Activity } from 'lucide-react';
-import { Button } from './ui/Button';
-import { Card, CardHeader, CardTitle, CardContent } from './ui/Card';
-import { Badge } from './ui/Badge';
-import type { CredibilityResult } from '@/types';
 
 async function askPerplexity(prompt: string): Promise<string> {
     const response = await fetch('https://api.perplexity.ai/chat/completions', { // Replace with the actual API endpoint
@@ -35,7 +30,7 @@ async function crv1(person: string): Promise<string> {
 export default function StarCredibility() {
     const [handle, setHandle] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [result, setResult] = useState<CredibilityResult | null>(null);
+    const [result, setResult] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -46,13 +41,8 @@ export default function StarCredibility() {
             const response = await crv1(handle);
             const scoreMatch = response.match(/credibility rating: (\d+)%/);
             if (scoreMatch) {
-                const score = parseInt(scoreMatch[1], 10);
-                setResult({
-                    score,
-                    recentPosts: result.recentPosts, // Retrieve this from API response
-                    verifiedStatus: result.verifiedStatus, // Retrieve this from API response
-                    analysis: result.analysis, // Retrieve this from API response
-                });
+                const score = scoreMatch[0];
+                setResult(score);
             } else {
                 console.error("Failed to parse credibility score");
             }
@@ -73,75 +63,29 @@ export default function StarCredibility() {
                     >
                         Enter star's social media handle
                     </label>
-                    <div className="mt-1 relative rounded-lg shadow-sm">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <User className="h-5 w-5 text-gray-400" />
-                        </div>
-                        <input
-                            type="text"
-                            id="handle"
-                            className="block w-full pl-10 rounded-lg border-brand-purple-200 focus:border-brand-purple-500 focus:ring-brand-purple-500"
-                            placeholder="@username"
-                            value={handle}
-                            onChange={(e) => setHandle(e.target.value)}
-                        />
-                    </div>
+                    <input
+                        type="text"
+                        id="handle"
+                        className="block w-full pl-2 rounded-lg border-gray-200 focus:border-brand-purple-500 focus:ring-brand-purple-500"
+                        placeholder="@username"
+                        value={handle}
+                        onChange={(e) => setHandle(e.target.value)}
+                    />
                 </div>
 
-                <Button 
+                <button 
                     type="submit" 
-                    isLoading={isLoading}
-                    className="w-full"
+                    disabled={isLoading}
+                    className="w-full px-4 py-2 bg-brand-purple-600 text-white font-medium rounded-lg"
                 >
-                    <Star className="mr-2 h-4 w-4" />
-                    Check Credibility
-                </Button>
+                    {isLoading ? 'Checking...' : 'Check Credibility'}
+                </button>
             </form>
 
             {result && (
-                <Card className="mt-8 animate-scale-in">
-                    <CardHeader>
-                        <div className="flex items-center justify-between">
-                            <CardTitle className="text-xl font-bold text-brand-purple-900">
-                                Credibility Analysis
-                            </CardTitle>
-                            <Badge
-                                variant={result.score > 70 ? "success" : "warning"}
-                                className="ml-2"
-                            >
-                                {result.score}% Credibility Score
-                            </Badge>
-                        </div>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="space-y-4">
-                            <div className="flex items-start space-x-3">
-                                <Activity className="h-5 w-5 text-brand-purple-500 mt-0.5" />
-                                <div>
-                                    <p className="font-medium text-gray-900">Account Activity</p>
-                                    <p className="text-sm text-gray-600">
-                                        {result.recentPosts} posts in the last 30 days
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div className="flex items-start space-x-3">
-                                <Star className="h-5 w-5 text-brand-purple-500 mt-0.5" />
-                                <div>
-                                    <p className="font-medium text-gray-900">Verification Status</p>
-                                    <p className="text-sm text-gray-600">
-                                        {result.verifiedStatus ? 'Verified Account' : 'Not Verified'}
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="pt-4 border-t border-gray-200">
-                                <h4 className="font-medium text-brand-purple-700 mb-2">Analysis Summary:</h4>
-                                <p className="text-gray-700">{result.analysis}</p>
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
+                <div className="mt-4 text-lg font-semibold text-center text-brand-purple-800">
+                    Credibility Result: {result}
+                </div>
             )}
         </div>
     );
