@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState } from 'react';
 import { Search, AlertTriangle, CheckCircle } from 'lucide-react';
@@ -21,9 +21,9 @@ export default function StarCredibility() {
       const analysis = await analyzeCredibility(name);
       setResult({
         score: analysis.score,
-        analysis: analysis.explanation,
-        recentPosts: 10,
-        verifiedStatus: true
+        analysis: analysis.analysis, // Correct property reference
+        recentPosts: 10, // This could be dynamic if desired
+        verifiedStatus: analysis.verifiedStatus // Use the correct property for verified status
       });
     } catch (error) {
       console.error('Error:', error);
