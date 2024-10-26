@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --brand-purple-50: 250 100% 98%;
+    --brand-purple-100: 251 91% 95%;
+    --brand-purple-200: 251 95% 92%;
+    --brand-purple-300: 251 94% 87%;
+    --brand-purple-400: 250 95% 77%;
+    --brand-purple-500: 250 95% 64%;
+    --brand-purple-600: 250 89% 58%;
+    --brand-purple-700: 250 84% 54%;
+    --brand-purple-800: 250 79% 46%;
+    --brand-purple-900: 250 69% 35%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .prose {
+    @apply max-w-none;
+  }
+  
+  .prose a {
+    @apply text-brand-purple-600 hover:text-brand-purple-700;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    @apply text-brand-purple-900;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+}
