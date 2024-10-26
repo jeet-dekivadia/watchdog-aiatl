@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 
-async function askPerplexity(prompt: string): Promise<string> {
-    const response = await fetch('https://api.perplexity.ai/chat/completions', { // Replace with the actual API endpoint
+async function askPerplexity(prompt: string): Promise<any> {
+    const response = await fetch('https://api.perplexity.ai/chat/completions', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer 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`, // Replace with your actual API key
+            'Authorization': `Bearer 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`,
         },
         body: JSON.stringify({ query: prompt }),
     });
@@ -16,38 +16,44 @@ async function askPerplexity(prompt: string): Promise<string> {
         throw new Error('Failed to fetch data from Perplexity API');
     }
 
-    const data = await response.json();
-    return data.result; // Adjust based on the actual response structure
+    return await response.json();
 }
 
 async function crv1(person: string): Promise<string> {
     const prompt = `analyze the credibility of the following person: ${person} give a credibility rating for this individual as a percentage. The output should only be the text in the bracket: (credibility rating: xx%) where xx is the credibility rating. Judge this rating based off the person's recent social media history.`;
 
     const response = await askPerplexity(prompt);
-    return response;
+    return response; // Return the full response for debugging
 }
 
 export default function StarCredibility() {
     const [handle, setHandle] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [result, setResult] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null); // To handle errors
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
         setResult(null); // Reset result on new submission
+        setError(null); // Reset error on new submission
 
         try {
             const response = await crv1(handle);
-            const scoreMatch = response.match(/credibility rating: (\d+)%/);
+            console.log("API Response:", response); // Log the raw response for debugging
+
+            // Assuming the response structure includes a 'result' field that has the desired text
+            const scoreMatch = response.result.match(/credibility rating: (\d+)%/);
             if (scoreMatch) {
-                const score = scoreMatch[0];
+                const score = scoreMatch[0]; // This will contain the matched string
                 setResult(score);
             } else {
                 console.error("Failed to parse credibility score");
+                setError("Could not extract credibility score from the response.");
             }
         } catch (error) {
             console.error('Error:', error);
+            setError("An error occurred while checking credibility.");
         } finally {
             setIsLoading(false);
         }
@@ -85,6 +91,12 @@ export default function StarCredibility() {
             {result && (
                 <div className="mt-4 text-lg font-semibold text-center text-brand-purple-800">
                     Credibility Result: {result}
+                </div>
+            )}
+
+            {error && (
+                <div className="mt-4 text-lg font-semibold text-center text-red-600">
+                    Error: {error}
                 </div>
             )}
         </div>
