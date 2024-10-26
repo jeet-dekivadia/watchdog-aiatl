@@ -1,7 +1,9 @@
 'use client'
 
+// src/components/ContentVerifier.tsx
+
 import { useState } from 'react';
-import { Search, AlertTriangle, CheckCircle, Loader2 } from 'lucide-react';
+import { Search, AlertTriangle, CheckCircle } from 'lucide-react';
 import { Button } from './ui/Button';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/Card';
 import { Badge } from './ui/Badge';
