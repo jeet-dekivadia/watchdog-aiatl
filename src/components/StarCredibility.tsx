@@ -1,4 +1,3 @@
-// src/components/StarCredibility.tsx
 'use client';
 
 import { useState } from 'react';
@@ -15,13 +14,15 @@ async function askPerplexity(prompt: string): Promise<PerplexityResponse> {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer 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`, // Your API key
+            'Authorization': `Bearer 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`, // Replace with your actual API key
         },
         body: JSON.stringify({ query: prompt }),
     });
 
     if (!response.ok) {
-        throw new Error('Failed to fetch data from Perplexity API');
+        const errorMessage = await response.text(); // Get error message from response
+        console.error("API Error:", errorMessage); // Log API error for debugging
+        throw new Error(`Failed to fetch data from Perplexity API: ${errorMessage}`);
     }
 
     return await response.json(); // Ensure we are returning JSON
@@ -66,7 +67,11 @@ export default function StarCredibility() {
             }
         } catch (error) {
             console.error('Error:', error);
-            setError("An error occurred while checking credibility.");
+            if (error instanceof Error) {
+                setError(error.message); // Display the actual error message
+            } else {
+                setError("An unknown error occurred.");
+            }
         } finally {
             setIsLoading(false);
         }
