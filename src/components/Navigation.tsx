@@ -11,7 +11,7 @@ export default function Navigation() {
             <Link href="/" className="flex-shrink-0 flex items-center">
               <Logo className="h-8 w-auto" />
               <span className="ml-2 text-xl font-bold text-brand-purple-900">
-                Watchdog AI ATL
+                WatchDog
               </span>
             </Link>
           </div>
