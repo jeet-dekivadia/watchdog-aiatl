@@ -1,0 +1,35 @@
+# .gitignore
+
+# Node.js dependencies
+/node_modules         # Node modules folder
+/.pnp                 # Plug'n'Play folder
+.pnp.js               # Plug'n'Play configuration file
+
+# Testing coverage reports
+/coverage             # Coverage output directory
+
+# Next.js build artifacts
+/.next/               # Build output for Next.js
+/out/                 # Output directory for static exports
+
+# Production build artifacts
+/build                # General production build output
+
+# Miscellaneous files
+.DS_Store             # macOS Finder metadata
+*.pem                 # PEM files (e.g., certificates)
+
+# Debugging logs
+npm-debug.log*       # npm debug logs
+yarn-debug.log*      # Yarn debug logs
+yarn-error.log*      # Yarn error logs
+
+# Local environment configuration
+.env*.local           # Local environment variable files
+
+# Vercel deployment files
+.vercel               # Vercel specific configuration
+
+# TypeScript build information
+*.tsbuildinfo        # TypeScript build info files
+next-env.d.ts        # Next.js environment types
