@@ -1,7 +1,5 @@
 'use client'
 
-// src/components/ContentVerifier.tsx
-
 import { useState } from 'react';
 import { Search, AlertTriangle, CheckCircle } from 'lucide-react';
 import { Button } from './ui/Button';
