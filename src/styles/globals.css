@@ -4,18 +4,19 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --brand-purple-50: 250 100% 98%;
-    --brand-purple-100: 251 91% 95%;
-    --brand-purple-200: 251 95% 92%;
-    --brand-purple-300: 251 94% 87%;
-    --brand-purple-400: 250 95% 77%;
-    --brand-purple-500: 250 95% 64%;
-    --brand-purple-600: 250 89% 58%;
-    --brand-purple-700: 250 84% 54%;
-    --brand-purple-800: 250 79% 46%;
-    --brand-purple-900: 250 69% 35%;
+    --background: hsl(0, 0%, 100%);
+    --foreground: hsl(222.2, 84%, 4.9%);
+    --brand-purple-50: hsl(250, 100%, 98%);
+    --brand-purple-100: hsl(251, 91%, 95%);
+    --brand-purple-200: hsl(251, 95%, 92%);
+    --brand-purple-300: hsl(251, 94%, 87%);
+    --brand-purple-400: hsl(250, 95%, 77%);
+    --brand-purple-500: hsl(250, 95%, 64%);
+    --brand-purple-600: hsl(250, 89%, 58%);
+    --brand-purple-700: hsl(250, 84%, 54%);
+    --brand-purple-800: hsl(250, 79%, 46%);
+    --brand-purple-900: hsl(250, 69%, 35%);
+    --border-color: hsl(0, 0%, 80%); /* Adjust as needed */
   }
 
   * {
@@ -43,10 +44,13 @@
 
 @layer utilities {
   .border-border {
-    border: 1px solid var(--border-color, #000); /* Example definition, adjust as needed */
+    border: 1px solid var(--border-color);
   }
   .bg-background {
     background-color: var(--background);
+  }
+  .text-foreground {
+    color: var(--foreground);
   }
   .animate-fade-in {
     animation: fadeIn 0.5s ease-out;
@@ -59,4 +63,20 @@
   .animate-scale-in {
     animation: scaleIn 0.3s ease-out;
   }
+}
+
+/* Add keyframes for animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
