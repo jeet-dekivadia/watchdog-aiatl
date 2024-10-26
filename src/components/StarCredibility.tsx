@@ -17,7 +17,6 @@ export default function StarCredibility() {
     setIsLoading(true);
 
     try {
-      // Implement API call to check credibility
       const response = await fetch('/api/check-credibility', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
