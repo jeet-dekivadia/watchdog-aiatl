@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About - Watchdog AI ATL',
+  title: 'About - WatchDog',
   description: 'Learn about our mission to promote truth and authenticity on social media.',
 }
 
@@ -11,12 +11,12 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl font-bold text-brand-purple-900 mb-6">
-            About Watchdog AI ATL
+            About WatchDog
           </h1>
           
           <div className="prose prose-purple max-w-none">
             <p className="text-lg text-gray-600 mb-6">
-              Watchdog AI ATL was founded with a simple mission: to promote truth and authenticity 
+              WatchDog was founded with a simple mission: to promote truth and authenticity 
               in social media through the power of artificial intelligence.
             </p>
 
