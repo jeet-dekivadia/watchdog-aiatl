@@ -16,11 +16,11 @@
     --brand-purple-700: hsl(250, 84%, 54%);
     --brand-purple-800: hsl(250, 79%, 46%);
     --brand-purple-900: hsl(250, 69%, 35%);
-    --border-color: hsl(0, 0%, 80%); /* Adjust as needed */
+    --border-color: hsl(0, 0%, 80%);
   }
 
   * {
-    @apply border-border;
+    border: none; /* Remove borders */
   }
 
   body {
@@ -43,9 +43,6 @@
 }
 
 @layer utilities {
-  .border-border {
-    border: 1px solid var(--border-color);
-  }
   .bg-background {
     background-color: var(--background);
   }
@@ -65,7 +62,6 @@
   }
 }
 
-/* Add keyframes for animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
