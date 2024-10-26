@@ -4,6 +4,13 @@ interface PerplexityResponse {
   sources?: string[];
 }
 
+interface StarCredibility {
+  score: number;
+  analysis: string;
+  recentPosts: number;
+  verifiedStatus: boolean;
+}
+
 export async function analyzeCredibility(name: string): Promise<StarCredibility> {
   const API_KEY = "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";
   const ENDPOINT = "https://api.perplexity.ai/chat/completions";
