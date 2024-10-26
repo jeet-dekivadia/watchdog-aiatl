@@ -1,125 +1,106 @@
-'use client';
+'use client'
 
 import { useState } from 'react';
-
-// Define a type for the expected response from the API
-interface PerplexityResponse {
-    data: {
-        text: string;
-    };
-}
-
-async function askPerplexity(prompt: string): Promise<PerplexityResponse> {
-    const response = await fetch('https://api.perplexity.ai/chat/completions', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer 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`, // Use your actual API key
-        },
-        body: JSON.stringify({
-            model: "llama-3.1-sonar-small-128k-online", // Updated model
-            messages: [{ role: "user", content: prompt }] // Include the required message
-        }),
-    });
-
-    if (!response.ok) {
-        const errorMessage = await response.text(); // Get error message from response
-        console.error("API Error:", errorMessage); // Log API error for debugging
-        throw new Error(`Failed to fetch data from Perplexity API: ${errorMessage}`);
-    }
-
-    return await response.json(); // Ensure we are returning JSON
-}
-
-async function crv1(person: string): Promise<PerplexityResponse> {
-    const prompt = `analyze the credibility of the following person: ${person} give a credibility rating for this individual as a percentage. The output should only be the text in the bracket: (credibility rating: xx%) where xx is the credibility rating. Judge this rating based off the person's recent social media history.`;
-
-    const response = await askPerplexity(prompt);
-    return response; // Returning the full response object
-}
+import { Search, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Button } from './ui/Button';
+import { Card, CardHeader, CardTitle, CardContent } from './ui/Card';
+import { Badge } from './ui/Badge';
+import { analyzeCredibility } from '@/lib/perplexity';
+import type { CredibilityResult } from '@/types';
 
 export default function StarCredibility() {
-    const [handle, setHandle] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [result, setResult] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null); // To handle errors
+  const [name, setName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState<CredibilityResult | null>(null);
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setResult(null); // Reset result on new submission
-        setError(null); // Reset error on new submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-        try {
-            const response = await crv1(handle);
-            console.log("API Response:", response); // Log the raw response for debugging
+    try {
+      const analysis = await analyzeCredibility(name);
+      setResult({
+        score: analysis.score,
+        analysis: analysis.explanation,
+        recentPosts: 10,
+        verifiedStatus: true
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-            // Check if response is an object and has the correct structure
-            if (response && typeof response === 'object') {
-                const scoreMatch = response.data.text.match(/credibility rating: (\d+)%/);
-                if (scoreMatch) {
-                    const score = scoreMatch[0]; // This will contain the matched string
-                    setResult(score);
-                } else {
-                    console.error("Failed to parse credibility score");
-                    setError("Could not extract credibility score from the response.");
-                }
-            } else {
-                console.error("Unexpected response structure:", response);
-                setError("Unexpected response format from the API.");
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            if (error instanceof Error) {
-                setError(error.message); // Display the actual error message
-            } else {
-                setError("An unknown error occurred.");
-            }
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    return (
-        <div className="max-w-3xl mx-auto px-4">
-            <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                    <label 
-                        htmlFor="handle" 
-                        className="block text-sm font-medium text-brand-purple-700"
-                    >
-                        Enter star's social media handle
-                    </label>
-                    <input
-                        type="text"
-                        id="handle"
-                        className="block w-full pl-2 rounded-lg border-gray-200 focus:border-brand-purple-500 focus:ring-brand-purple-500"
-                        placeholder="@username"
-                        value={handle}
-                        onChange={(e) => setHandle(e.target.value)}
-                    />
-                </div>
-
-                <button 
-                    type="submit" 
-                    disabled={isLoading}
-                    className="w-full px-4 py-2 bg-brand-purple-600 text-white font-medium rounded-lg"
-                >
-                    {isLoading ? 'Checking...' : 'Check Credibility'}
-                </button>
-            </form>
-
-            {result && (
-                <div className="mt-4 text-lg font-semibold text-center text-brand-purple-800">
-                    Credibility Result: {result}
-                </div>
-            )}
-
-            {error && (
-                <div className="mt-4 text-lg font-semibold text-center text-red-600">
-                    Error: {error}
-                </div>
-            )}
+  return (
+    <div className="max-w-3xl mx-auto px-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label 
+            htmlFor="name" 
+            className="block text-sm font-medium text-brand-purple-700"
+          >
+            Enter celebrity or influencer name
+          </label>
+          <input
+            type="text"
+            id="name"
+            className="mt-1 block w-full rounded-lg border-brand-purple-200 shadow-sm focus:border-brand-purple-500 focus:ring-brand-purple-500 p-2"
+            placeholder="Enter name (e.g., Taylor Swift, Elon Musk)..."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
         </div>
-    );
+
+        <Button 
+          type="submit" 
+          isLoading={isLoading}
+          className="w-full"
+        >
+          <Search className="mr-2 h-4 w-4" />
+          Check Credibility
+        </Button>
+      </form>
+
+      {result && (
+        <Card className="mt-8 animate-scale-in">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-xl font-bold text-brand-purple-900">
+                Credibility Analysis
+              </CardTitle>
+              <Badge
+                variant={result.score > 70 ? "success" : "warning"}
+                className="ml-2"
+              >
+                {result.score}% Credibility Score
+              </Badge>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-start space-x-3">
+              {result.score > 70 ? (
+                <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
+              ) : (
+                <AlertTriangle className="h-5 w-5 text-yellow-500 mt-0.5" />
+              )}
+              <p className="text-gray-700">{result.analysis}</p>
+            </div>
+            <div className="mt-4 space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-brand-purple-700">Recent Posts Analyzed:</span>
+                <span className="font-medium">{result.recentPosts}</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-brand-purple-700">Verified Status:</span>
+                <span className="font-medium">
+                  {result.verifiedStatus ? '✓ Verified' : '✗ Not Verified'}
+                </span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
 }
