@@ -7,7 +7,7 @@ async function askPerplexity(prompt: string): Promise<any> {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer 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`,
+            'Authorization': `Bearer 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`, 
         },
         body: JSON.stringify({ query: prompt }),
     });
@@ -16,14 +16,14 @@ async function askPerplexity(prompt: string): Promise<any> {
         throw new Error('Failed to fetch data from Perplexity API');
     }
 
-    return await response.json();
+    return await response.json(); // Ensure we are returning JSON
 }
 
 async function crv1(person: string): Promise<string> {
     const prompt = `analyze the credibility of the following person: ${person} give a credibility rating for this individual as a percentage. The output should only be the text in the bracket: (credibility rating: xx%) where xx is the credibility rating. Judge this rating based off the person's recent social media history.`;
 
     const response = await askPerplexity(prompt);
-    return response; // Return the full response for debugging
+    return response; // Returning the full response object for debugging
 }
 
 export default function StarCredibility() {
@@ -42,14 +42,19 @@ export default function StarCredibility() {
             const response = await crv1(handle);
             console.log("API Response:", response); // Log the raw response for debugging
 
-            // Assuming the response structure includes a 'result' field that has the desired text
-            const scoreMatch = response.result.match(/credibility rating: (\d+)%/);
-            if (scoreMatch) {
-                const score = scoreMatch[0]; // This will contain the matched string
-                setResult(score);
+            // Check if response is an object and has the correct structure
+            if (typeof response === 'object' && response) {
+                const scoreMatch = response?.data?.text.match(/credibility rating: (\d+)%/);
+                if (scoreMatch) {
+                    const score = scoreMatch[0]; // This will contain the matched string
+                    setResult(score);
+                } else {
+                    console.error("Failed to parse credibility score");
+                    setError("Could not extract credibility score from the response.");
+                }
             } else {
-                console.error("Failed to parse credibility score");
-                setError("Could not extract credibility score from the response.");
+                console.error("Unexpected response structure:", response);
+                setError("Unexpected response format from the API.");
             }
         } catch (error) {
             console.error('Error:', error);
