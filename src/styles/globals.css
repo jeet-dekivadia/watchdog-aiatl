@@ -43,7 +43,10 @@
 
 @layer utilities {
   .border-border {
-    border: 1px solid var(--border-color, #000);
+    border: 1px solid var(--border-color, #000); /* Example definition, adjust as needed */
+  }
+  .bg-background {
+    background-color: var(--background);
   }
   .animate-fade-in {
     animation: fadeIn 0.5s ease-out;
