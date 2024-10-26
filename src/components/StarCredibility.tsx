@@ -14,9 +14,12 @@ async function askPerplexity(prompt: string): Promise<PerplexityResponse> {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer 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`, // Replace with your actual API key
+            'Authorization': `Bearer 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`, // Use your actual API key
         },
-        body: JSON.stringify({ query: prompt }),
+        body: JSON.stringify({
+            model: "llama-3.1-sonar-small-128k-online", // Updated model
+            messages: [{ role: "user", content: prompt }] // Include the required message
+        }),
     });
 
     if (!response.ok) {
