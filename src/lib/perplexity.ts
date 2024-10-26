@@ -1,5 +1,3 @@
-// src/lib/perplexity.ts
-
 interface PerplexityResponse {
   score: number;
   explanation: string;
@@ -35,19 +33,16 @@ export async function analyzeContent(content: string): Promise<PerplexityRespons
   const botResponse = data.choices[0].message.content;
 
   return {
-    score: extractScore(botResponse), // Implement this to extract the score from the response
+    score: extractScore(botResponse),
     explanation: botResponse,
-    sources: extractSources(botResponse), // Implement this to extract sources if available
+    sources: extractSources(botResponse),
   };
 }
 
-// Implement extractScore and extractSources based on your response format
 function extractScore(response: string): number {
-  // Extract and return the score from the response
   return 0;
 }
 
 function extractSources(response: string): string[] {
-  // Extract and return the sources from the response
   return [];
 }
