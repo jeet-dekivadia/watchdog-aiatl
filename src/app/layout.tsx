@@ -6,7 +6,7 @@ import '@/styles/globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Watchdog AI ATL - Social Media Content Verification',
+  title: 'Watchdog - Social Media Content Verification',
   description: 'Verify social media content and check influencer credibility with AI-powered analysis.',
 }
 
