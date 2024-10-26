@@ -1,33 +1,33 @@
 {
-  "name": "watchdog-aiatl",          // Project name
-  "version": "0.1.0",                // Project version
-  "private": true,                   // Prevent accidental publication to npm
-  "scripts": {                       // NPM scripts for managing the project
-    "dev": "next dev",              // Starts the Next.js development server
-    "build": "next build",          // Builds the application for production
-    "start": "next start",          // Starts the production server
-    "lint": "next lint"             // Runs ESLint to check code quality
+  "name": "watchdog-aiatl",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "dependencies": {                  // Runtime dependencies
-    "@heroicons/react": "^2.0.18",  // Heroicons for React
-    "@tailwindcss/forms": "^0.5.7", // Tailwind forms plugin
-    "class-variance-authority": "^0.7.0", // Utility for managing class variance
-    "clsx": "^2.0.0",                // Utility for conditionally joining class names
-    "lucide-react": "^0.294.0",      // Icons for React
-    "next": "14.0.3",                // Next.js framework
-    "react": "^18.2.0",              // React library
-    "react-dom": "^18.2.0",          // React DOM library
-    "tailwind-merge": "^2.0.0"       // Utility for merging Tailwind CSS classes
+  "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "@tailwindcss/forms": "^0.5.7",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.294.0",
+    "next": "14.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.0.0"
   },
-  "devDependencies": {               // Development-only dependencies
-    "@types/node": "^20.9.0",       // Type definitions for Node.js
-    "@types/react": "^18.2.37",     // Type definitions for React
-    "@types/react-dom": "^18.2.15", // Type definitions for React DOM
-    "autoprefixer": "^10.4.16",      // PostCSS plugin to add vendor prefixes
-    "eslint": "^8.53.0",             // Linting utility for JavaScript/TypeScript
-    "eslint-config-next": "14.0.3",  // ESLint configuration for Next.js
-    "postcss": "^8.4.31",            // PostCSS tool for transforming CSS
-    "tailwindcss": "^3.3.5",         // Tailwind CSS framework
-    "typescript": "^5.2.2"            // TypeScript language support
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.53.0",
+    "eslint-config-next": "14.0.3",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2"
   }
 }
