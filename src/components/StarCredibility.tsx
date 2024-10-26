@@ -1,13 +1,21 @@
+// src/components/StarCredibility.tsx
 'use client';
 
 import { useState } from 'react';
 
-async function askPerplexity(prompt: string): Promise<any> {
+// Define a type for the expected response from the API
+interface PerplexityResponse {
+    data: {
+        text: string;
+    };
+}
+
+async function askPerplexity(prompt: string): Promise<PerplexityResponse> {
     const response = await fetch('https://api.perplexity.ai/chat/completions', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer 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`, 
+            'Authorization': `Bearer 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`, // Your API key
         },
         body: JSON.stringify({ query: prompt }),
     });
@@ -19,11 +27,11 @@ async function askPerplexity(prompt: string): Promise<any> {
     return await response.json(); // Ensure we are returning JSON
 }
 
-async function crv1(person: string): Promise<string> {
+async function crv1(person: string): Promise<PerplexityResponse> {
     const prompt = `analyze the credibility of the following person: ${person} give a credibility rating for this individual as a percentage. The output should only be the text in the bracket: (credibility rating: xx%) where xx is the credibility rating. Judge this rating based off the person's recent social media history.`;
 
     const response = await askPerplexity(prompt);
-    return response; // Returning the full response object for debugging
+    return response; // Returning the full response object
 }
 
 export default function StarCredibility() {
@@ -43,8 +51,8 @@ export default function StarCredibility() {
             console.log("API Response:", response); // Log the raw response for debugging
 
             // Check if response is an object and has the correct structure
-            if (typeof response === 'object' && response) {
-                const scoreMatch = response?.data?.text.match(/credibility rating: (\d+)%/);
+            if (response && typeof response === 'object') {
+                const scoreMatch = response.data.text.match(/credibility rating: (\d+)%/);
                 if (scoreMatch) {
                     const score = scoreMatch[0]; // This will contain the matched string
                     setResult(score);
