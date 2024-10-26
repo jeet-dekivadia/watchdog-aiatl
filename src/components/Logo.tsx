@@ -1,7 +1,7 @@
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://pbs.twimg.com/profile_images/1555324907491319811/oso3XVR0_400x400.png"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
