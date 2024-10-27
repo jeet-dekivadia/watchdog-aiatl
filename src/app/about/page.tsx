@@ -17,7 +17,7 @@ export default function AboutPage() {
           <div className="prose prose-purple max-w-none">
             <p className="text-lg text-gray-600 mb-6">
               WatchDog was founded with a simple mission: to promote truth and authenticity 
-              in social media through the power of artificial intelligence.
+              on the internet through the power of artificial intelligence.
             </p>
 
             <h2 className="text-2xl font-semibold text-brand-purple-800 mt-8 mb-4">
@@ -32,7 +32,7 @@ export default function AboutPage() {
               How It Works
             </h2>
             <p className="text-gray-600 mb-6">
-              We use advanced AI models to analyze social media content and user profiles. Our 
+              We use advanced AI models to analyze social media content and Influential figures' credibility . Our 
               technology examines multiple factors including content authenticity, account history, 
               and cross-referenced information to provide comprehensive credibility assessments.
             </p>
@@ -41,7 +41,7 @@ export default function AboutPage() {
               Our Team
             </h2>
             <p className="text-gray-600 mb-6">
-              We're a team of CS and CompE freshmen at Georgia Tech who initially found this idea as a project in a hackathon AI ATL 2024.
+              We're a team of CS and CompE freshmen at Georgia Tech who initially found this idea as a project in the 2024 AI ATL Hackathon.
             </p>
           </div>
         </div>
