@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Button } from './ui/Button';
-import { Logo } from './Logo';
 
 export default function Navigation() {
   return (
