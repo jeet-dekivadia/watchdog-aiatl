@@ -4,37 +4,27 @@
 
 @layer base {
   :root {
-    --background: hsl(240, 100%, 5%); /* Dark background for contrast */
-    --foreground: hsl(0, 0%, 100%); /* White text */
-    
-    --brand-purple-50: hsl(250, 100%, 90%);
-    --brand-purple-100: hsl(250, 100%, 80%);
-    --brand-purple-200: hsl(250, 100%, 70%);
-    --brand-purple-300: hsl(250, 100%, 60%);
-    --brand-purple-400: hsl(250, 100%, 50%);
-    --brand-purple-500: hsl(250, 100%, 40%);
-    --brand-purple-600: hsl(250, 80%, 30%);
-    --brand-purple-700: hsl(250, 60%, 25%);
-    --brand-purple-800: hsl(250, 50%, 20%);
-    --brand-purple-900: hsl(250, 40%, 15%);
-    
-    --brand-yellow-500: hsl(50, 100%, 50%); /* Bright Yellow */
-    --brand-yellow-600: hsl(50, 100%, 45%);
-    
-    --brand-green-500: hsl(120, 100%, 30%); /* Dark Green */
-    --brand-green-600: hsl(120, 100%, 40%);
-    
-    --brand-black: hsl(0, 0%, 5%);
+    --background: hsl(0, 0%, 100%);
+    --foreground: hsl(222.2, 84%, 4.9%);
+    --brand-purple-50: hsl(250, 100%, 98%);
+    --brand-purple-100: hsl(251, 91%, 95%);
+    --brand-purple-200: hsl(251, 95%, 92%);
+    --brand-purple-300: hsl(251, 94%, 87%);
+    --brand-purple-400: hsl(250, 95%, 77%);
+    --brand-purple-500: hsl(250, 95%, 64%);
+    --brand-purple-600: hsl(250, 89%, 58%);
+    --brand-purple-700: hsl(250, 84%, 54%);
+    --brand-purple-800: hsl(250, 79%, 46%);
+    --brand-purple-900: hsl(250, 69%, 35%);
+    --border-color: hsl(0, 0%, 80%);
   }
 
   * {
-    border: none;
-    box-sizing: border-box;
+    border: none; /* Remove borders */
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Arial', sans-serif;
   }
 }
 
@@ -44,21 +34,11 @@
   }
   
   .prose a {
-    @apply text-brand-purple-400 hover:text-brand-yellow-500;
-    transition: color 0.3s ease;
+    @apply text-brand-purple-600 hover:text-brand-purple-700;
   }
   
   .prose h1, .prose h2, .prose h3, .prose h4 {
-    @apply text-brand-purple-200;
-    text-shadow: 0 0 15px var(--brand-yellow-500), 0 0 30px var(--brand-yellow-600); /* Glow effect */
-  }
-
-  .btn {
-    @apply bg-brand-purple-500 text-white rounded-full py-2 px-4 transition-all duration-300 shadow-glow;
-  }
-
-  .btn:hover {
-    @apply bg-brand-yellow-500 transform scale-105; /* Bright button effect on hover */
+    @apply text-brand-purple-900;
   }
 }
 
@@ -79,14 +59,6 @@
   
   .animate-scale-in {
     animation: scaleIn 0.3s ease-out;
-  }
-
-  .shadow-glow {
-    box-shadow: 0 0 20px var(--brand-purple-600), 0 0 40px var(--brand-purple-400); /* Neon glow */
-  }
-
-  .text-shadow {
-    text-shadow: 0 0 5px var(--brand-purple-300), 0 0 10px var(--brand-purple-500); /* Text glow effect */
   }
 }
 
