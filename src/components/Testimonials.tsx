@@ -2,24 +2,24 @@ export default function Testimonials() {
   const testimonials = [
     {
       id: 1,
-      quote: "This tool has been invaluable in helping us verify viral content before sharing it with our audience.",
-      author: "Sarah Johnson",
-      role: "Social Media Manager",
-      company: "NewsDaily",
+      quote: "This tool has been invaluable in helping us keep track of My own and my teams Stats!.",
+      author: "Lionel Messi",
+      role: "Forward",
+      company: "Inter Miami",
     },
     {
       id: 2,
       quote: "The star credibility feature helps us make informed decisions about potential brand partnerships.",
-      author: "Michael Chen",
-      role: "Marketing Director",
-      company: "BrandSync",
+      author: "Elon Musk",
+      role: "CEO",
+      company: "Twitter, Spacex, Tesla",
     },
     {
       id: 3,
       quote: "Fast, accurate, and incredibly user-friendly. It's become an essential part of our fact-checking process.",
-      author: "Rachel Martinez",
-      role: "Content Creator",
-      company: "TruthMedia",
+      author: "Harvey Specter",
+      role: "Closer",
+      company: "Pearson Specter",
     },
   ];
 
