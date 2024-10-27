@@ -16,7 +16,7 @@ export default function PrivacyPage() {
           
           <div className="prose prose-purple max-w-none">
             <p className="text-lg text-gray-600 mb-6">
-              Last updated: October 26, 2024
+              Last updated: October 27, 2024
             </p>
 
             <section className="mb-8">
