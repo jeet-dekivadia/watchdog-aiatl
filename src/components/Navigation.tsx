@@ -8,7 +8,7 @@ export default function Navigation() {
         <div className="flex justify-between h-16">
           <div className="flex">
             <Link href="/" className="flex-shrink-0 flex items-center">
-              <img src="public/logo.png" className="h-8 w-auto" />
+              <img src="/logo.png" className="h-8 w-auto" alt="Logo" />
               <span className="ml-2 text-xl font-bold text-brand-purple-900">
                 WatchDog
               </span>
