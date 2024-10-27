@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import StarCredibility from '@/components/StarCredibility'
 
 export const metadata: Metadata = {
-  title: 'Star Credibility Check - WatchDog',
+  title: 'Star Credibility Check',
   description: 'Analyze the credibility of social media influencers and celebrities.',
 }
 
