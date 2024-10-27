@@ -41,9 +41,7 @@ export default function AboutPage() {
               Our Team
             </h2>
             <p className="text-gray-600 mb-6">
-              We're a team of AI researchers, software engineers, and social media experts based 
-              in Atlanta, Georgia. We're passionate about using technology to make social media 
-              a more trustworthy space.
+              We're a team of CS and CompE freshmen at Georgia Tech who initially found this idea as a project in a hackathon AI ATL 2024.
             </p>
           </div>
         </div>
