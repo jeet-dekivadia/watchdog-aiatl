@@ -41,7 +41,8 @@ export default function AboutPage() {
               Our Team
             </h2>
             <p className="text-gray-600 mb-6">
-              We're a team of CS and CompE freshmen at Georgia Tech who initially found this idea as a project in the 2024 AI ATL Hackathon.
+              We're a team of CS and CompE freshmen at Georgia Tech who initially found this idea as a project in
+              the 2024 AI ATL Hackathon.
             </p>
           </div>
         </div>
