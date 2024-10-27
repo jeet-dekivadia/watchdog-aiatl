@@ -12,10 +12,10 @@ export default function StarCredibilityPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold text-brand-purple-900">
-            Star Credibility Check
+            Credibility Check
           </h1>
           <p className="mt-4 text-lg text-gray-600">
-            Analyze the authenticity and credibility of social media influencers
+            Analyze authenticity and credibility
           </p>
         </div>
         <StarCredibility />
