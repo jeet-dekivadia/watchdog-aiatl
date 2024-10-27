@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState } from 'react';
 import { Search, AlertTriangle, CheckCircle } from 'lucide-react';
@@ -33,7 +33,12 @@ export default function ContentVerifier() {
 
   return (
     <div className="max-w-3xl mx-auto px-4">
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6 relative bg-white shadow-lg rounded-lg p-6 border border-transparent
+                   hover:border-gradient-to-r hover:from-brand-purple-500 hover:to-brand-purple-700 
+                   hover:shadow-[0_0_15px_rgba(102,51,153,0.5)] transition-all duration-300 ease-in-out"
+      >
         <div>
           <label 
             htmlFor="content" 
@@ -44,7 +49,8 @@ export default function ContentVerifier() {
           <textarea
             id="content"
             rows={4}
-            className="mt-1 block w-full rounded-lg border-brand-purple-200 shadow-sm focus:border-brand-purple-500 focus:ring-brand-purple-500"
+            className="mt-1 block w-full rounded-lg border-brand-purple-200 shadow-sm 
+                       focus:border-brand-purple-500 focus:ring-brand-purple-500 transition-all"
             placeholder="Paste the content you want to verify..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -54,7 +60,8 @@ export default function ContentVerifier() {
         <Button 
           type="submit" 
           isLoading={isLoading}
-          className="w-full"
+          className="w-full bg-gradient-to-r from-brand-purple-500 to-brand-purple-600 hover:from-brand-purple-600 
+                     hover:to-brand-purple-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200"
         >
           <Search className="mr-2 h-4 w-4" />
           Verify Content
@@ -62,7 +69,7 @@ export default function ContentVerifier() {
       </form>
 
       {result && (
-        <Card className="mt-8 animate-scale-in">
+        <Card className="mt-8 animate-scale-in bg-gradient-to-br from-white to-brand-purple-50 border border-brand-purple-200 shadow-md rounded-lg p-6">
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="text-xl font-bold text-brand-purple-900">
