@@ -19,6 +19,9 @@ export default function Navigation() {
             <Link href="/star-credibility">
               <Button variant="ghost">Star Credibility</Button>
             </Link>
+            Link href="src/components/Untrustworthy.tsx">
+              <Button variant="ghost">Untrustworthy Celebs</Button>
+            </Link>
             <Link href="/about">
               <Button variant="ghost">About</Button>
             </Link>
